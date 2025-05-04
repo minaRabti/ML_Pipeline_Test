@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class DataLoading:
    
-    __data_path = "data/credit_customers.csv"  # private class variable
+    __data_path = "/data/dataCredit.csv"  # private class variable
     
     @classmethod
     def get_data_path(cls) -> str:
