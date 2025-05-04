@@ -3,17 +3,17 @@ from dataclasses import dataclass
 
 # Data Ingestion Configuration
 @dataclass
-class DataIngestionConfig:
-    train_file_path: str = os.path.join("data", "split", "train.csv")
-    test_file_path: str = os.path.join("data", "split", "test.csv")
-    data_file_path = os.path.join("data", "sample_data.csv")
+class DataLoading:
+   
+    __data_path = "data/credit_customers.csv"  # private class variable
     
-    test_size: float = 0.2
-    random_state: int = 42
+    @classmethod
+    def get_data_path(cls) -> str:
+        return cls.__data_path
 
 # Data Transformation Configuration
 class DataTransformationConfig:
-    target_variable: str = "Churn"
+    #target_variable: str = "Churn"
     categorical_columns: list = [
         'gender', 'Partner', 'Dependents', 'PhoneService', 'MultipleLines', 'InternetService',
         'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',

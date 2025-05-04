@@ -2,15 +2,33 @@ import os
 import sys
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from src.config import DataIngestionConfig
+from src.config import DataLoading
 
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 
-class DataIngestion:
+class Dataloader:
+
     def __init__(self):
-        self.data_load_config = DataIngestionConfig()
+        self.__path = DataLoading.get_data_path() # private property loaded from Config
+    #public method    
+    def load(self) -> pd.DataFrame:
+        return self.__load_csv()
+    
+    #private method
+    def __load_csv(self) -> pd.DataFrame:
+        try:
+            return pd.read_csv(self.__path)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Data file not found at path: {self.__path}")
+        except Exception as e:
+            raise RuntimeError(f"An error occurred while loading data: {str(e)}")
+
+
+class DataSplit:
+
+             
     def initiate_data_ingestion(self):
         try:
             logging.info("Reading input data")
